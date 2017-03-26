@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    <display-name>/caraProject</display-name>
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>CARA_Realm</realm-name>
+        <form-login-config>
+            <form-login-page>/LoginForm.html</form-login-page>
+            <form-error-page>/LoginFormError.html</form-error-page>
+        </form-login-config>
+    </login-config>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>InsuranceApp</web-resource-name>
+            <url-pattern>/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>Admin</role-name>
+            <role-name>Insured</role-name>
+            <role-name>Underwriter</role-name>
+        </auth-constraint>
+    </security-constraint>
+</web-app>

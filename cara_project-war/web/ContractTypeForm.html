@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Création de type de contrat</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+          <a href="./index.html">Retour</a>
+          <br><br>
+          <FORM ACTION = "AddContractTypeServlet" METHOD = "POST">
+            Catégorie du contrat : <br/>
+            <input type="radio" name="category" value="habitation" checked> Habitation
+            <br>
+            <input type="radio" name="category" value="automobile" > Automobile
+            <br>
+            <input type="radio" name="category" value="vie"> Vie
+            <br>
+            Description : <INPUT TYPE = "text" NAME = "description">
+            <br>
+            Montant minimal : <INPUT TYPE = "number" NAME = "minimalAmount">
+            <br>
+            <input TYPE="submit" VALUE="Créer le type de contrat">
+            <input TYPE="reset"  VALUE="Reset">
+        </FORM>
+    </body>
+</html>

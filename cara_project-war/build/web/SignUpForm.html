@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Création de compte</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+          <a href="./index.html">Retour</a>
+          <br><br>
+          <FORM ACTION = "AddUserServlet" METHOD = "POST">
+            Rôle de l'utilisateur : <br>
+            <input type="radio" name="role" value="insured" checked> Assuré
+            <br>
+            <input type="radio" name="role" value="admin" >Administrateur
+            <br>
+            <input type="radio" name="role" value="underwriter">Courtier
+            <br>
+            Login : <INPUT TYPE = "text" NAME = "login">
+            <br>
+            Mot de passe : <INPUT TYPE = "password" NAME = "password">
+            <br>
+            Nom : <INPUT TYPE = "text" NAME = "lastName">
+            <br>
+            Prénom : <INPUT TYPE = "text" NAME = "firstName">
+            <br>
+            Email : <INPUT TYPE = "text" NAME = "email">
+            <br>
+            Adresse (uniquement pour les assurés) : <INPUT TYPE = "text" NAME = "address">
+            <br>
+            <input TYPE="submit" VALUE="Créer le compte">
+            <input TYPE="reset"  VALUE="Reset">
+        </FORM>
+    </body>
+</html>
