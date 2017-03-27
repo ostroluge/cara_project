@@ -81,6 +81,7 @@ public class UserBean implements UserBeanRemote {
     }
 
     @PermitAll
+    @Override
     public List<Utilisateur> selectAll() {
         List<Utilisateur> user = persistence.createQuery(
                 "select u from Utilisateur u").getResultList();
@@ -93,5 +94,12 @@ public class UserBean implements UserBeanRemote {
         List<Insured> insured = persistence.createQuery(
                 "select i from Insured i").getResultList();
         return insured;
+    }
+
+    @PermitAll
+    @Override
+    public void deleteUser(int idUser) {
+        Query query = persistence.createQuery("DELETE FROM Utilisateur u where u.id = :id"); 
+        query.setParameter("id", idUser).executeUpdate();
     }
 }

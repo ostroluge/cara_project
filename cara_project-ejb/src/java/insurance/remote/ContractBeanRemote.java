@@ -37,4 +37,10 @@ public interface ContractBeanRemote {
     List<Habitation> selectAllHabitation();
     
     List<Life> selectAllLife();
+    
+    List<Automobile> getAutomobileContractsByUser(String login);
+    
+    List<Habitation> getHabitationContractsByUser(String login);
+    
+    List<Life> getLifeContractsByUser(String login);
 }

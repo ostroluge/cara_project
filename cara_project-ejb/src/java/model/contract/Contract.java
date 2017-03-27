@@ -27,9 +27,6 @@ public class Contract implements Serializable {
     private int id;
     private double subscriptionAmount;
     
-    @Column(insertable = false, updatable = false)
-    private String dtype;
-    
     @ManyToOne
     @JoinColumn(name="insured_id")
     private Insured insured;
@@ -77,13 +74,5 @@ public class Contract implements Serializable {
 
     public void setContractType(ContractType contractType) {
         this.contractType = contractType;
-    }
-
-    public String getDtype() {
-        return dtype;
-    }
-
-    public void setDtype(String dtype) {
-        this.dtype = dtype;
     }
 }

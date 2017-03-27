@@ -19,6 +19,8 @@ import javax.annotation.security.PermitAll;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import model.user.Utilisateur;
 
 /**
  *
@@ -76,7 +78,7 @@ public class ContractBean implements ContractBeanRemote {
                 "select a from Automobile a").getResultList();
         return contracts;
     }
-
+    
     @PermitAll
     @Override
     public List<Habitation> selectAllHabitation() {
@@ -92,4 +94,38 @@ public class ContractBean implements ContractBeanRemote {
                 "select l from Life l").getResultList();
         return contracts;
     }
+
+    @PermitAll
+    @Override
+    public List<Automobile> getAutomobileContractsByUser(String login) {
+        String request = "select u from Utilisateur as u where u.login ='" + login + "'";
+        Query query = persistence.createQuery(request);
+        Utilisateur user = null;
+        List<Automobile> result = null;
+        try {
+            user = (Utilisateur)query.getSingleResult();
+            if (user != null) {
+                String contractRequest = "select a from Automobile as a where a.insured.login ='"+user.getLogin()+"'";
+                Query contractsQuery = persistence.createQuery(contractRequest);
+                result = query.getResultList();
+            }
+        } catch(Exception e) {
+            
+        }
+        return result;
+    }
+
+    @PermitAll
+    @Override
+    public List<Habitation> getHabitationContractsByUser(String login) {
+        return null;
+    }
+
+    @PermitAll
+    @Override
+    public List<Life> getLifeContractsByUser(String login) {
+        return null;
+    }
+
+    
 }

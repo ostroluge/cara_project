@@ -5,10 +5,9 @@
  */
 package servlet;
 
-import insurance.remote.ContractBeanRemote;
+import insurance.remote.UserBeanRemote;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.security.Principal;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
@@ -17,20 +16,17 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.contract.Automobile;
-import model.contract.Contract;
-import model.contract.Habitation;
-import model.contract.Life;
+import model.user.Utilisateur;
 
 /**
  *
  * @author tostrowski
  */
-@WebServlet("/ListContractsServlet")
-public class ListContractsServlet extends HttpServlet {
+@WebServlet(name = "UserListServlet", urlPatterns = {"/UserListServlet"})
+public class UserListServlet extends HttpServlet {
 
     @EJB
-    ContractBeanRemote mContractBean;
+    UserBeanRemote mUserBean;
     
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -44,18 +40,10 @@ public class ListContractsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String remoteUser = request.getRemoteUser();
-        
-        List<Automobile> automobiles = mContractBean.selectAllAuto();
-        List<Habitation> habitations = mContractBean.selectAllHabitation();
-        List<Life> lifes = mContractBean.selectAllLife();
-        
-        request.setAttribute("automobiles", automobiles);
-        request.setAttribute("habitations", habitations);
-        request.setAttribute("lifes", lifes);
-        
-        RequestDispatcher rd = request.getRequestDispatcher("ListContracts.jsp");
-        rd.forward(request, response);
+        List<Utilisateur> users = mUserBean.selectAll();
+        request.setAttribute("Users", users);  
+        RequestDispatcher dp = request.getRequestDispatcher("ListUsers.jsp");  
+        dp.forward(request, response);
     }
 
     /**

@@ -22,4 +22,6 @@ public interface ContractTypeBeanRemote {
                          double minimalAmount);
 
     List<ContractType> getAllContractType();
+
+    void deleteContractType(int contractTypeId);
 }

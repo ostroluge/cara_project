@@ -12,10 +12,19 @@ and open the template in the editor.
     </head>
     <body>
         <div>
+            <h3>Admin</h3>
+            <h4>Utilisateurs</h4>
             <a href="./SignUpForm.html">Créer un nouveau compte</a> <br/>
+            <a href="./UserListServlet">Liste des utilisateurs</a> <br/>
+            <h4>Types de contrat</h4>
             <a href="./ContractTypeForm.html">Créer un nouveau type de contrat</a> <br/>
+            <a href="./ContractTypeListServlet">Liste des types de contrat</a> <br/>
+            <h3>Courtier</h3>
             <a href="./AddContractServlet">Créer un nouveau contrat</a> <br/>
-            <a href="./InsuredManagement.html">Gestion assuré</a> <br/>
+            <h3>Assuré</h3>
+            <a href="./ListContractsServlet">Consulter la liste des contrats</a> <br/>
+            <a href="">Consulter la liste des types de contrats</a> <br/>
+            <a href="">Consulter les demandes en attente</a> <br/> <br/>
             <FORM ACTION="LogoutServlet" METHOD=POST>
                 <INPUT TYPE=SUBMIT VALUE="Logout">
             </FORM>

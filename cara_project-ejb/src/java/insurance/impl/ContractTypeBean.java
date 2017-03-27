@@ -15,6 +15,7 @@ import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import utils.Category;
 
 /**
@@ -47,5 +48,11 @@ public class ContractTypeBean implements ContractTypeBeanRemote {
        List<ContractType> contractTypes = persistence.createQuery(
                 "select c from ContractType c").getResultList();
         return contractTypes;
+    }
+
+    @Override
+    public void deleteContractType(int contractTypeId) {
+        Query query = persistence.createQuery("DELETE FROM ContractType c where c.id = :id"); 
+        query.setParameter("id", contractTypeId).executeUpdate();
     }
 }
