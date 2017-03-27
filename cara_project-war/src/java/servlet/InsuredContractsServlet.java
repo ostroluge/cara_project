@@ -26,8 +26,8 @@ import model.contract.Life;
  *
  * @author tostrowski
  */
-@WebServlet("/ListContractsServlet")
-public class ListContractsServlet extends HttpServlet {
+@WebServlet("/InsuredContractsServlet")
+public class InsuredContractsServlet extends HttpServlet {
 
     @EJB
     ContractBeanRemote mContractBean;
@@ -54,7 +54,7 @@ public class ListContractsServlet extends HttpServlet {
         request.setAttribute("habitations", habitations);
         request.setAttribute("lifes", lifes);
         
-        RequestDispatcher rd = request.getRequestDispatcher("ListContracts.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("InsuredContractList.jsp");
         rd.forward(request, response);
     }
 

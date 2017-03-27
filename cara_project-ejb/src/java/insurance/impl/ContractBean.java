@@ -127,5 +127,9 @@ public class ContractBean implements ContractBeanRemote {
         return null;
     }
 
-    
+    @Override
+    public void deleteContract(int contractId) {
+        Query query = persistence.createQuery("DELETE FROM Contract c where c.id = :id"); 
+        query.setParameter("id", contractId).executeUpdate();
+    }
 }

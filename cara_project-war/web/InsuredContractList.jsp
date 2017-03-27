@@ -1,6 +1,6 @@
 <%-- 
     Document   : ListContracts
-    Created on : 27 mars 2017, 22:18:06
+    Created on : 26 mars 2017, 18:07:12
     Author     : tostrowski
 --%>
 
@@ -29,7 +29,6 @@
                     <td><c:out value="${automobile.design}" /></td>
                     <td><c:out value="${automobile.registrationNumber}" /></td>
                     <td><c:out value="${automobile.nameMainDriver}" /></td>
-                    <td><a href="DeleteContractServlet?idContract=${automobile.id}">Supprimer</a></td>
                 </tr>
              </c:forEach>
         </table>
@@ -47,7 +46,6 @@
                     <td><c:out value="${habitation.subscriptionAmount}" /></td>
                     <td><c:out value="${habitation.maxAmount}" /></td>
                     <td><c:out value="${habitation.address}" /></td>
-                    <td><a href="DeleteContractServlet?idContract=${habitation.id}">Supprimer</a></td>
                 </tr>
              </c:forEach>
         </table>
@@ -65,7 +63,6 @@
                     <td><c:out value="${life.subscriptionAmount}" /></td>
                     <td><c:out value="${life.capitalAmount}" /></td>
                     <td><c:out value="${life.minimumSubscriptionDuration}" /></td>
-                    <td><a href="DeleteContractServlet?idContract=${life.id}">Supprimer</a></td>
                 </tr>
              </c:forEach>
         </table>   

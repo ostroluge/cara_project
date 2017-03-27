@@ -43,4 +43,6 @@ public interface ContractBeanRemote {
     List<Habitation> getHabitationContractsByUser(String login);
     
     List<Life> getLifeContractsByUser(String login);
+    
+    void deleteContract(int contractId);
 }
