@@ -98,8 +98,8 @@ public class UserBean implements UserBeanRemote {
 
     @PermitAll
     @Override
-    public void deleteUser(int idUser) {
-        Query query = persistence.createQuery("DELETE FROM Utilisateur u where u.id = :id"); 
-        query.setParameter("id", idUser).executeUpdate();
+    public void deleteUser(String loginUser) {
+        Query query = persistence.createQuery("DELETE FROM Utilisateur u where u.login = :login"); 
+        query.setParameter("login", loginUser).executeUpdate();
     }
 }

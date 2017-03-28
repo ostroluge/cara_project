@@ -13,13 +13,13 @@
         <title>Ajout d'un contrat</title>
     </head>
     <body>
-        <a href="./index.html">Retour</a>
+        <a href="./IndexServlet">Retour</a>
         <br><br>
         <FORM ACTION = "AddContractServlet" METHOD = "POST">
             Assuré : <br/>
             <select name="insured">
                 <c:forEach items="${requestScope['users']}" var="item">
-                    <option value="${item.id}">
+                    <option value="${item.login}">
                         ${item.lastname}
                     </option>
                 </c:forEach>

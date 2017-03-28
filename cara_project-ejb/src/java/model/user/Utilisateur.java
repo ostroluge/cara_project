@@ -25,8 +25,6 @@ import org.apache.commons.codec.digest.DigestUtils;
 public class Utilisateur implements Serializable {
     
     @Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE)
-    private int id;
     private String login;
     private String lastname;
     private String firstname;
@@ -47,14 +45,6 @@ public class Utilisateur implements Serializable {
         this.firstname = firstname;
         this.password = DigestUtils.sha256Hex(password);
         this.groups = new ArrayList<>();
-    }
-    
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getLastname() {

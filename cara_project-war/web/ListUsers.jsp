@@ -26,7 +26,7 @@
             <td><c:out value="${item.firstname}" /></td>
             <td><c:out value="${item.lastname}" /></td>
             <td><c:out value="${item.login}" /></td>
-            <td><a href="DeleteUserServlet?idUser=${item.id}">Supprimer</a></td>
+            <td><a href="DeleteUserServlet?loginUser=${item.login}">Supprimer</a></td>
          </tr>
         </c:forEach>
      </table>

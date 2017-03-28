@@ -38,8 +38,8 @@ public class DeleteUserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int i = Integer.parseInt(request.getParameter("idUser"));
-        mUserBean.deleteUser(i);   
+        String login = request.getParameter("loginUser");
+        mUserBean.deleteUser(login);   
         RequestDispatcher dp = request.getRequestDispatcher("UserListServlet");  
         dp.forward(request, response);
     }

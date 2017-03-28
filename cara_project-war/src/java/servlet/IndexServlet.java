@@ -5,33 +5,22 @@
  */
 package servlet;
 
-import insurance.remote.ContractBeanRemote;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.security.Principal;
-import java.util.List;
-import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.contract.Automobile;
-import model.contract.Contract;
-import model.contract.Habitation;
-import model.contract.Life;
 
 /**
  *
  * @author tostrowski
  */
-@WebServlet("/InsuredContractsServlet")
-public class InsuredContractsServlet extends HttpServlet {
+@WebServlet(name = "IndexServlet", urlPatterns = {"/IndexServlet"})
+public class IndexServlet extends HttpServlet {
 
-    @EJB
-    ContractBeanRemote mContractBean;
-    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -44,18 +33,16 @@ public class InsuredContractsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String remoteUser = request.getRemoteUser();
+        boolean isAdmin = request.isUserInRole("Admin");
+        boolean isUnderwriter = request.isUserInRole("Underwriter");
+        boolean isInsured = request.isUserInRole("Insured");
         
-        List<Automobile> automobiles = mContractBean.getAutomobileContractsByUser(remoteUser);
-        List<Habitation> habitations = mContractBean.selectAllHabitation();
-        List<Life> lifes = mContractBean.selectAllLife();
+        request.setAttribute("isAdmin", isAdmin);
+        request.setAttribute("isUnderwriter", isUnderwriter);
+        request.setAttribute("isInsured", isInsured);
         
-        request.setAttribute("automobiles", automobiles);
-        request.setAttribute("habitations", habitations);
-        request.setAttribute("lifes", lifes);
-        
-        RequestDispatcher rd = request.getRequestDispatcher("InsuredContractList.jsp");
-        rd.forward(request, response);
+        RequestDispatcher dp = request.getRequestDispatcher("/index.jsp");  
+        dp.forward(request, response);
     }
 
     /**

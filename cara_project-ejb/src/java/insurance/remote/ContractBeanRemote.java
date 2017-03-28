@@ -21,7 +21,7 @@ public interface ContractBeanRemote {
     
     void addContract(double subscriptionAmount,
                      int contractTypeId,
-                     int insuredId,
+                     String loginInsured,
                      String address,
                      double maxAmount,
                      double capitalAmount,

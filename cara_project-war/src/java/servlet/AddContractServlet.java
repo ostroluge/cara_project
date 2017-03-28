@@ -73,7 +73,7 @@ public class AddContractServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String insuredId = request.getParameter("insured");
+        String loginInsured = request.getParameter("insured");
         String contractTypeId = request.getParameter("contractType");
         String subscriptionAmount = request.getParameter("subscriptionAmount");
         String design = request.getParameter("design");
@@ -89,7 +89,7 @@ public class AddContractServlet extends HttpServlet {
         minimumSubscriptionDuration = checkField(minimumSubscriptionDuration);
         
         mContractBean.addContract(Double.parseDouble(subscriptionAmount),
-                Integer.parseInt(contractTypeId), Integer.parseInt(insuredId),
+                Integer.parseInt(contractTypeId), loginInsured,
                 address, Double.parseDouble(maxAmount),
                 Double.parseDouble(capitalAmount), Double.parseDouble(minimumSubscriptionDuration),
                 design, nameMainDriver, registrationNumber);

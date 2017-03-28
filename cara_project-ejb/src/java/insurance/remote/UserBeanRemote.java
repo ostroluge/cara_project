@@ -29,5 +29,5 @@ public interface UserBeanRemote {
     
     List<Utilisateur> selectAll();
     
-    void deleteUser(int idUser);
+    void deleteUser(String loginUser);
 }

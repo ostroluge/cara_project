@@ -37,10 +37,10 @@ public class ContractBean implements ContractBeanRemote {
     
     @PermitAll
     @Override
-    public void addContract(double subscriptionAmount, int contractTypeId, int insuredId, String address, double maxAmount, double capitalAmount, double minimalSubscriptionDuration, String design, String nameMainDriver, String registrationNumber) {
+    public void addContract(double subscriptionAmount, int contractTypeId, String loginInsured, String address, double maxAmount, double capitalAmount, double minimalSubscriptionDuration, String design, String nameMainDriver, String registrationNumber) {
         Contract newContract = null;
         ContractType contractType = persistence.find(ContractType.class, contractTypeId);
-        Insured insured = persistence.find(Insured.class, insuredId);
+        Insured insured = persistence.find(Insured.class, loginInsured);
         
         switch(contractType.getCategory()) {
             case "automobile":
@@ -103,11 +103,20 @@ public class ContractBean implements ContractBeanRemote {
         Utilisateur user = null;
         List<Automobile> result = null;
         try {
-            user = (Utilisateur)query.getSingleResult();
+            user = (Insured)query.getSingleResult();
             if (user != null) {
-                String contractRequest = "select a from Automobile as a where a.insured.login ='"+user.getLogin()+"'";
-                Query contractsQuery = persistence.createQuery(contractRequest);
-                result = query.getResultList();
+                System.out.println("user != null");
+                if (user instanceof Insured) {
+                    System.out.println("user instanceof Insured");
+                    List<Contract> contracts = ((Insured) user).getListContracts();
+                    System.out.println("contract size = " + contracts.size());
+                    for (Contract contract : contracts) {
+                        if (contract instanceof Automobile) {
+                            System.out.println("add contract");
+                            result.add((Automobile)contract);
+                        }
+                    }
+                }
             }
         } catch(Exception e) {
             
