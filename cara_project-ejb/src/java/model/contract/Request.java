@@ -36,6 +36,13 @@ public class Request implements Serializable {
     @JoinColumn(name="contract_type_id")
     private ContractType contractType;
 
+    public Request(String type, Insured insured, Contract contract, ContractType contractType) {
+        this.type = type;
+        this.insured = insured;
+        this.contract = contract;
+        this.contractType = contractType;
+    }
+    
     public int getId() {
         return id;
     }

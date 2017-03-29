@@ -5,10 +5,9 @@
  */
 package servlet;
 
-import insurance.remote.ContractBeanRemote;
+import insurance.remote.ContractTypeBeanRemote;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.security.Principal;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
@@ -17,20 +16,17 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.contract.Automobile;
-import model.contract.Contract;
-import model.contract.Habitation;
-import model.contract.Life;
+import model.contract.ContractType;
 
 /**
  *
  * @author tostrowski
  */
-@WebServlet("/InsuredContractsServlet")
-public class InsuredContractsServlet extends HttpServlet {
+@WebServlet(name = "InsuredContractTypesServlet", urlPatterns = {"/InsuredContractTypesServlet"})
+public class InsuredContractTypesServlet extends HttpServlet {
 
     @EJB
-    ContractBeanRemote mContractBean;
+    ContractTypeBeanRemote mContractTypeBean;
     
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -44,18 +40,10 @@ public class InsuredContractsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String remoteUser = request.getRemoteUser();
-        
-        List<Automobile> automobiles = mContractBean.getAutomobileContractsByUser(remoteUser);
-        List<Habitation> habitations = mContractBean.getHabitationContractsByUser(remoteUser);
-        List<Life> lifes = mContractBean.getLifeContractsByUser(remoteUser);
-        
-        request.setAttribute("automobiles", automobiles);
-        request.setAttribute("habitations", habitations);
-        request.setAttribute("lifes", lifes);
-        
-        RequestDispatcher rd = request.getRequestDispatcher("InsuredContractList.jsp");
-        rd.forward(request, response);
+        List<ContractType> contractTypes = mContractTypeBean.getAllContractType();
+        request.setAttribute("contractTypes", contractTypes);  
+        RequestDispatcher dp = request.getRequestDispatcher("InsuredContractTypeList.jsp");  
+        dp.forward(request, response);
     }
 
     /**

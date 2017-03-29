@@ -31,7 +31,7 @@ public class ContractTypeBean implements ContractTypeBeanRemote {
     @PersistenceContext(unitName = "cara_project")
     EntityManager persistence;
     
-    @PermitAll
+    @RolesAllowed("Admin")
     @Override
     public void addContractType(Category category, String description, double minimalAmount) {
         ContractType newContractType = new ContractType();
@@ -50,6 +50,7 @@ public class ContractTypeBean implements ContractTypeBeanRemote {
         return contractTypes;
     }
 
+    @RolesAllowed("Admin")
     @Override
     public void deleteContractType(int contractTypeId) {
         Query query = persistence.createQuery("DELETE FROM ContractType c where c.id = :id"); 

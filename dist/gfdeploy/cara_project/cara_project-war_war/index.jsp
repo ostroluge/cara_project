@@ -31,7 +31,7 @@
             <c:if test="${isInsured}">
                 <h3>Assuré</h3>
                 <a href="./InsuredContractsServlet">Consulter la liste des contrats</a> <br/>
-                <a href="">Consulter la liste des types de contrats</a> <br/>
+                <a href="./InsuredContractTypesServlet">Consulter la liste des types de contrats</a> <br/>
                 <a href="">Consulter les demandes en attente</a> <br/> <br/>
             </c:if>
             <FORM ACTION="LogoutServlet" METHOD=POST>

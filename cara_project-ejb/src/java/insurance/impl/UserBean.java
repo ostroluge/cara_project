@@ -42,7 +42,7 @@ public class UserBean implements UserBeanRemote {
         return users;
     }
 
-    @PermitAll
+    @RolesAllowed("Admin")
     @Override
     public void addUser(String firstName,
                         String lastName,
@@ -80,7 +80,7 @@ public class UserBean implements UserBeanRemote {
         }
     }
 
-    @PermitAll
+    @RolesAllowed("Admin")
     @Override
     public List<Utilisateur> selectAll() {
         List<Utilisateur> user = persistence.createQuery(
@@ -88,7 +88,7 @@ public class UserBean implements UserBeanRemote {
         return user;
     }
 
-    @PermitAll
+    @RolesAllowed("Underwriter")
     @Override
     public List<Insured> selectAllInsured() {
         List<Insured> insured = persistence.createQuery(
@@ -96,7 +96,7 @@ public class UserBean implements UserBeanRemote {
         return insured;
     }
 
-    @PermitAll
+    @RolesAllowed("Admin")
     @Override
     public void deleteUser(String loginUser) {
         Query query = persistence.createQuery("DELETE FROM Utilisateur u where u.login = :login"); 

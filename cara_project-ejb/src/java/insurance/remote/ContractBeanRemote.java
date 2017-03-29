@@ -30,8 +30,6 @@ public interface ContractBeanRemote {
                      String nameMainDriver,
                      String registrationNumber);
     
-    List<Contract> selectAll();
-    
     List<Automobile> selectAllAuto();
     
     List<Habitation> selectAllHabitation();

@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.security.DeclareRoles;
 import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -35,7 +36,7 @@ public class ContractBean implements ContractBeanRemote {
     @PersistenceContext(unitName = "cara_project")
     EntityManager persistence;
     
-    @PermitAll
+    @RolesAllowed("Underwriter")
     @Override
     public void addContract(double subscriptionAmount, int contractTypeId, String loginInsured, String address, double maxAmount, double capitalAmount, double minimalSubscriptionDuration, String design, String nameMainDriver, String registrationNumber) {
         Contract newContract = null;
@@ -60,18 +61,18 @@ public class ContractBean implements ContractBeanRemote {
         if (newContract != null) {
             insured.getListContracts().add(newContract);
             persistence.persist(newContract);
+            persistence.merge(insured);
         }
     }
 
-    @PermitAll
+    @RolesAllowed("Underwriter")
     @Override
-    public List<Contract> selectAll() {
-        List<Contract> contracts = persistence.createQuery(
-                "select c from Contract c").getResultList();
-        return contracts;
+    public void deleteContract(int contractId) {
+        Query query = persistence.createQuery("DELETE FROM Contract c where c.id = :id"); 
+        query.setParameter("id", contractId).executeUpdate();
     }
-
-    @PermitAll
+    
+    @RolesAllowed({"Underwriter"})
     @Override
     public List<Automobile> selectAllAuto() {
         List<Automobile> contracts = persistence.createQuery(
@@ -79,7 +80,7 @@ public class ContractBean implements ContractBeanRemote {
         return contracts;
     }
     
-    @PermitAll
+    @RolesAllowed({"Underwriter"})
     @Override
     public List<Habitation> selectAllHabitation() {
         List<Habitation> contracts = persistence.createQuery(
@@ -87,7 +88,7 @@ public class ContractBean implements ContractBeanRemote {
         return contracts;
     }
 
-    @PermitAll
+    @RolesAllowed({"Underwriter"})
     @Override
     public List<Life> selectAllLife() {
         List<Life> contracts = persistence.createQuery(
@@ -95,50 +96,78 @@ public class ContractBean implements ContractBeanRemote {
         return contracts;
     }
 
-    @PermitAll
+    @RolesAllowed("Insured")
     @Override
     public List<Automobile> getAutomobileContractsByUser(String login) {
         String request = "select u from Utilisateur as u where u.login ='" + login + "'";
         Query query = persistence.createQuery(request);
-        Utilisateur user = null;
-        List<Automobile> result = null;
+        Utilisateur user;
+        List<Automobile> result = new ArrayList<>();
         try {
             user = (Insured)query.getSingleResult();
             if (user != null) {
-                System.out.println("user != null");
                 if (user instanceof Insured) {
-                    System.out.println("user instanceof Insured");
                     List<Contract> contracts = ((Insured) user).getListContracts();
-                    System.out.println("contract size = " + contracts.size());
                     for (Contract contract : contracts) {
                         if (contract instanceof Automobile) {
-                            System.out.println("add contract");
                             result.add((Automobile)contract);
                         }
                     }
                 }
             }
         } catch(Exception e) {
-            
+            System.out.println(e.getMessage());
         }
         return result;
     }
 
-    @PermitAll
+    @RolesAllowed("Insured")
     @Override
     public List<Habitation> getHabitationContractsByUser(String login) {
-        return null;
+        String request = "select u from Utilisateur as u where u.login ='" + login + "'";
+        Query query = persistence.createQuery(request);
+        Utilisateur user;
+        List<Habitation> result = new ArrayList<>();
+        try {
+            user = (Insured)query.getSingleResult();
+            if (user != null) {
+                if (user instanceof Insured) {
+                    List<Contract> contracts = ((Insured) user).getListContracts();
+                    for (Contract contract : contracts) {
+                        if (contract instanceof Habitation) {
+                            result.add((Habitation)contract);
+                        }
+                    }
+                }
+            }
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return result;
     }
 
-    @PermitAll
+    @RolesAllowed("Insured")
     @Override
     public List<Life> getLifeContractsByUser(String login) {
-        return null;
-    }
-
-    @Override
-    public void deleteContract(int contractId) {
-        Query query = persistence.createQuery("DELETE FROM Contract c where c.id = :id"); 
-        query.setParameter("id", contractId).executeUpdate();
+        String request = "select u from Utilisateur as u where u.login ='" + login + "'";
+        Query query = persistence.createQuery(request);
+        Utilisateur user;
+        List<Life> result = new ArrayList<>();
+        try {
+            user = (Insured)query.getSingleResult();
+            if (user != null) {
+                if (user instanceof Insured) {
+                    List<Contract> contracts = ((Insured) user).getListContracts();
+                    for (Contract contract : contracts) {
+                        if (contract instanceof Life) {
+                            result.add((Life)contract);
+                        }
+                    }
+                }
+            }
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return result;
     }
 }

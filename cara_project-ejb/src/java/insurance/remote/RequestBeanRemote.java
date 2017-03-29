@@ -17,4 +17,15 @@ import model.contract.Request;
 public interface RequestBeanRemote {
     
     List<Request> selectAll();
+    
+    List<Request> getRequestsByType(String type);
+    
+    List<Request> getRequestsByUser(String type, String user);
+    
+    void addRequest(String type,
+                    String loginInsured,
+                    Integer contractId,
+                    Integer contractTypeId);
+
+    void deleteRequest(int requestId);
 }
