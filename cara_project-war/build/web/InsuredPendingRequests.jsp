@@ -1,6 +1,6 @@
 <%-- 
-    Document   : ListContracts
-    Created on : 26 mars 2017, 18:07:12
+    Document   : InsuredPendingRequests
+    Created on : 29 mars 2017, 17:30:01
     Author     : tostrowski
 --%>
 
@@ -10,10 +10,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Liste des contrats</title>
+        <title>Liste des demandes en attente</title>
     </head>
     <body>
-        <h3>Automobile</h3>
+        <h3>Arrêt de contrat</h3>
+        <h4>Automobile</h4>
         <table>
             <tr>
                 <th>ID</th>
@@ -29,14 +30,13 @@
                     <td><c:out value="${automobile.design}" /></td>
                     <td><c:out value="${automobile.registrationNumber}" /></td>
                     <td><c:out value="${automobile.nameMainDriver}" /></td>
-                    <td><a href="StopContractRequestServlet?idContract=${automobile.id}">Demande arrêt</a></td>
                 </tr>
              </c:forEach>
         </table>
         <c:if test="${automobiles.isEmpty()}">
-            <div>Pas de contrat de ce type.</div>
+            <div>Aucune demande en attente.</div>
         </c:if>
-        <h3>Habitation</h3>
+        <h4>Habitation</h4>
         <table>
             <tr>
                 <th>ID</th>
@@ -50,14 +50,13 @@
                     <td><c:out value="${habitation.subscriptionAmount}" /></td>
                     <td><c:out value="${habitation.maxAmount}" /></td>
                     <td><c:out value="${habitation.address}" /></td>
-                    <td><a href="StopContractRequestServlet?idContract=${habitation.id}">Demande arrêt</a></td>
                 </tr>
              </c:forEach>
         </table>
         <c:if test="${habitations.isEmpty()}">
-            <div>Pas de contrat de ce type.</div>
+            <div>Aucune demande en attente.</div>
         </c:if>
-        <h3>Vie</h3>
+        <h4>Vie</h4>
         <table>
             <tr>
                 <th>ID</th>
@@ -71,12 +70,31 @@
                     <td><c:out value="${life.subscriptionAmount}" /></td>
                     <td><c:out value="${life.capitalAmount}" /></td>
                     <td><c:out value="${life.minimumSubscriptionDuration}" /></td>
-                    <td><a href="StopContractRequestServlet?idContract=${life.id}">Demande arrêt</a></td>
                 </tr>
              </c:forEach>
         </table>
         <c:if test="${lifes.isEmpty()}">
-            <div>Pas de contrat de ce type.</div>
+            <div>Aucune demande en attente.</div>
+        </c:if>
+        <h3>Souscription de contrat</h3>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Catégorie</th>
+                <th>Montant minimal</th>
+                <th>Description</th>
+            </tr>
+            <c:forEach items="${createRequests}" var="createRequest">
+                <tr>
+                    <td><c:out value="${createRequest.id}" /></td>
+                    <td><c:out value="${createRequest.contractType.category}" /></td>
+                    <td><c:out value="${createRequest.contractType.minAmount}" /></td>
+                    <td><c:out value="${createRequest.contractType.description}" /></td>
+                </tr>
+             </c:forEach>
+        </table>
+        <c:if test="${createRequests.isEmpty()}">
+            <div>Aucune demande en attente.</div>
         </c:if>
     </body>
 </html>

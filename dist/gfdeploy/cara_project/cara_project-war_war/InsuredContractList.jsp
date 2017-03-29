@@ -29,9 +29,13 @@
                     <td><c:out value="${automobile.design}" /></td>
                     <td><c:out value="${automobile.registrationNumber}" /></td>
                     <td><c:out value="${automobile.nameMainDriver}" /></td>
+                    <td><a href="StopContractRequestServlet?idContract=${automobile.id}">Demande arrêt</a></td>
                 </tr>
              </c:forEach>
         </table>
+        <c:if test="${automobiles.isEmpty()}">
+            <div>Pas de contrat de ce type.</div>
+        </c:if>
         <h3>Habitation</h3>
         <table>
             <tr>
@@ -46,9 +50,13 @@
                     <td><c:out value="${habitation.subscriptionAmount}" /></td>
                     <td><c:out value="${habitation.maxAmount}" /></td>
                     <td><c:out value="${habitation.address}" /></td>
+                    <td><a href="StopContractRequestServlet?idContract=${habitation.id}">Demande arrêt</a></td>
                 </tr>
              </c:forEach>
         </table>
+        <c:if test="${habitations.isEmpty()}">
+            <div>Pas de contrat de ce type.</div>
+        </c:if>
         <h3>Vie</h3>
         <table>
             <tr>
@@ -63,8 +71,12 @@
                     <td><c:out value="${life.subscriptionAmount}" /></td>
                     <td><c:out value="${life.capitalAmount}" /></td>
                     <td><c:out value="${life.minimumSubscriptionDuration}" /></td>
+                    <td><a href="StopContractRequestServlet?idContract=${life.id}">Demande arrêt</a></td>
                 </tr>
              </c:forEach>
-        </table>   
+        </table>
+        <c:if test="${lifes.isEmpty()}">
+            <div>Pas de contrat de ce type.</div>
+        </c:if>
     </body>
 </html>

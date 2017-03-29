@@ -29,6 +29,9 @@
          </tr>
         </c:forEach>
      </table>
+     <c:if test="${contractTypes.isEmpty()}">
+        <div>Pas de type de contrat.</div>
+     </c:if>
     </body> 
     
 </html>

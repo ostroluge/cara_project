@@ -25,9 +25,13 @@
             <td><c:out value="${item.category}" /></td>
             <td><c:out value="${item.description}" /></td>
             <td><c:out value="${item.minAmount}" /></td>
+            <td><a href="CreateContractRequestServlet?idContractType=${item.id}">Demande souscription</a></td>
          </tr>
         </c:forEach>
      </table>
+     <c:if test="${contractTypes.isEmpty()}">
+        <div>Pas de type de contrat.</div>
+     </c:if>
     </body> 
     
 </html>

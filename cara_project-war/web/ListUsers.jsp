@@ -30,6 +30,9 @@
          </tr>
         </c:forEach>
      </table>
+     <c:if test="${Users.isEmpty()}">
+            <div>Pas d'utilisateur.</div>
+        </c:if>
     </body> 
     
 </html>

@@ -33,6 +33,9 @@
                 </tr>
              </c:forEach>
         </table>
+        <c:if test="${automobiles.isEmpty()}">
+            <div>Pas de contrat de ce type.</div>
+        </c:if>
         <h3>Habitation</h3>
         <table>
             <tr>
@@ -51,6 +54,9 @@
                 </tr>
              </c:forEach>
         </table>
+        <c:if test="${habitations.isEmpty()}">
+            <div>Pas de contrat de ce type.</div>
+        </c:if>
         <h3>Vie</h3>
         <table>
             <tr>
@@ -68,6 +74,9 @@
                     <td><a href="DeleteContractServlet?idContract=${life.id}">Supprimer</a></td>
                 </tr>
              </c:forEach>
-        </table>   
+        </table>
+        <c:if test="${lifes.isEmpty()}">
+            <div>Pas de contrat de ce type.</div>
+        </c:if>
     </body>
 </html>
