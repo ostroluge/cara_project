@@ -28,4 +28,6 @@ public interface RequestBeanRemote {
                     Integer contractTypeId);
 
     void deleteRequest(int requestId);
+    
+    Request getRequestByContractId(int contractId);
 }

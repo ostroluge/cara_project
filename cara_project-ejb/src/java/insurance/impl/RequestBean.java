@@ -57,7 +57,7 @@ public class RequestBean implements RequestBeanRemote {
         return result;
     }
 
-    @RolesAllowed("Insured")
+    @RolesAllowed({"Insured", "Underwriter"})
     @Override
     public List<Request> getRequestsByUser(String type, String login) {
         String requestText = "select u from Utilisateur as u where u.login ='" + login + "'";
@@ -109,5 +109,20 @@ public class RequestBean implements RequestBeanRemote {
     public void deleteRequest(int requestId) {
         Query query = persistence.createQuery("DELETE FROM Request r where r.id = :id"); 
         query.setParameter("id", requestId).executeUpdate();
+    }
+
+    @RolesAllowed("Underwriter")
+    @Override
+    public Request getRequestByContractId(int contractId) {
+        List<Request> requests = selectAll();
+        Request result = null;
+        for (Request r : requests) {
+            if (r.getContract() != null) {
+                if (r.getContract().getId() == contractId) {
+                    result = r;
+                }
+            }
+        }
+        return result;
     }
 }

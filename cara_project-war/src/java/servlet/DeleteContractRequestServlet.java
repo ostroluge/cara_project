@@ -22,8 +22,8 @@ import model.contract.Request;
  *
  * @author tostrowski
  */
-@WebServlet(name = "DeleteContractServlet", urlPatterns = {"/DeleteContractServlet"})
-public class DeleteContractServlet extends HttpServlet {
+@WebServlet(name = "DeleteContractRequestServlet", urlPatterns = {"/DeleteContractRequestServlet"})
+public class DeleteContractRequestServlet extends HttpServlet {
 
     @EJB
     ContractBeanRemote mContractBean;
@@ -43,9 +43,13 @@ public class DeleteContractServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int i = Integer.parseInt(request.getParameter("idContract"));
-        mContractBean.deleteContract(i);   
-        RequestDispatcher dp = request.getRequestDispatcher("ContractListServlet");  
+        int i = Integer.parseInt(request.getParameter("idContract"));  
+        Request pendingRequest = mRequestBean.getRequestByContractId(i);
+        if (pendingRequest != null) {
+            mRequestBean.deleteRequest(pendingRequest.getId());
+        }
+        mContractBean.deleteContract(i); 
+        RequestDispatcher dp = request.getRequestDispatcher("UnderwriterPendingRequestsServlet");  
         dp.forward(request, response);
     }
 

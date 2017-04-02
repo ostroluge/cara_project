@@ -27,13 +27,14 @@
                 <h3>Courtier</h3>
                 <a href="./AddContractServlet">Créer un nouveau contrat</a> <br/>
                 <a href="./ContractListServlet">Liste des contrats</a> <br/>
-                <a href="./InsuredListServlet">Liste des assurés</a> <br/> <br/>
+                <a href="./InsuredListServlet">Liste des assurés</a> <br/>
+                <a href="./UnderwriterPendingRequestsServlet">Liste des demandes en attente</a> <br/> <br/>
             </c:if>
             <c:if test="${isInsured}">
                 <h3>Assuré</h3>
-                <a href="./InsuredContractsServlet">Consulter la liste des contrats</a> <br/>
-                <a href="./InsuredContractTypesServlet">Consulter la liste des types de contrats</a> <br/>
-                <a href="./InsuredPendingRequestsServlet">Consulter les demandes en attente</a> <br/> <br/>
+                <a href="./InsuredContractsServlet">Liste des contrats</a> <br/>
+                <a href="./InsuredContractTypesServlet">Liste des types de contrats</a> <br/>
+                <a href="./InsuredPendingRequestsServlet">Liste des demandes en attente</a> <br/> <br/>
             </c:if>
             <FORM ACTION="LogoutServlet" METHOD=POST>
                 <INPUT TYPE=SUBMIT VALUE="Logout">
