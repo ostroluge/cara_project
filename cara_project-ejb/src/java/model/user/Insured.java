@@ -11,6 +11,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 /**
@@ -29,19 +31,23 @@ public class Insured extends Utilisateur implements Serializable {
     @OneToMany(mappedBy="insured")
     private List<Request> requests;
     
+    @ManyToOne
+    @JoinColumn(name="underwriter_login")
+    private Underwriter underwriter;
+    
     public Insured() {
         
     }
 
     public Insured(String address, String mailInsured, String login,
-            String lastname, String firstname, String password) {
+            String lastname, String firstname, String password,
+            Underwriter underwriter) {
         super(login, lastname, firstname, password);
         this.address = address;
         this.mailInsured = mailInsured;
         this.listContracts = new ArrayList<>();
+        this.underwriter = underwriter;
     }
-
-    
     
     public String getAddress() {
         return address;
@@ -73,5 +79,13 @@ public class Insured extends Utilisateur implements Serializable {
 
     public void setRequests(List<Request> requests) {
         this.requests = requests;
+    }
+
+    public Underwriter getUnderwriter() {
+        return underwriter;
+    }
+
+    public void setUnderwriter(Underwriter underwriter) {
+        this.underwriter = underwriter;
     }
 }

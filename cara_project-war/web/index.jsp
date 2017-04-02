@@ -17,7 +17,7 @@
             <c:if test="${isAdmin}">
                 <h3>Admin</h3>
                 <h4>Utilisateurs</h4>
-                <a href="./SignUpForm.html">Créer un nouveau compte</a> <br/>
+                <a href="./AddUserServlet">Créer un nouveau compte</a> <br/>
                 <a href="./UserListServlet">Liste des utilisateurs</a> <br/>
                 <h4>Types de contrat</h4>
                 <a href="./ContractTypeForm.html">Créer un nouveau type de contrat</a> <br/>
@@ -26,7 +26,8 @@
             <c:if test="${isUnderwriter}">
                 <h3>Courtier</h3>
                 <a href="./AddContractServlet">Créer un nouveau contrat</a> <br/>
-                <a href="./ContractListServlet">Liste des contrats</a> <br/> <br/>
+                <a href="./ContractListServlet">Liste des contrats</a> <br/>
+                <a href="./InsuredListServlet">Liste des assurés</a> <br/> <br/>
             </c:if>
             <c:if test="${isInsured}">
                 <h3>Assuré</h3>

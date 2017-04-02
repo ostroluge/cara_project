@@ -6,7 +6,10 @@
 package model.user;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import model.contract.Request;
 
 /**
  *
@@ -17,6 +20,9 @@ public class Underwriter extends Utilisateur implements Serializable {
     
     private String mailUnderwriter;
     
+    @OneToMany(mappedBy="underwriter")
+    private List<Insured> insured;
+
     public Underwriter() {
         
     }
@@ -32,5 +38,13 @@ public class Underwriter extends Utilisateur implements Serializable {
 
     public void setMailUnderwriter(String mailUnderwriter) {
         this.mailUnderwriter = mailUnderwriter;
+    }
+
+    public List<Insured> getInsured() {
+        return insured;
+    }
+
+    public void setInsured(List<Insured> insured) {
+        this.insured = insured;
     }
 }

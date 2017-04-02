@@ -1,17 +1,19 @@
+<%-- 
+    Document   : SignUpForm
+    Created on : 2 avr. 2017, 16:32:45
+    Author     : tostrowski
+--%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
-        <title>Création de compte</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
     </head>
     <body>
-          <a href="./IndexServlet">Retour</a>
+        <a href="./IndexServlet">Retour</a>
           <br><br>
           <FORM ACTION = "AddUserServlet" METHOD = "POST">
             Rôle de l'utilisateur : <br>
@@ -31,8 +33,17 @@ and open the template in the editor.
             <br>
             Email : <INPUT TYPE = "text" NAME = "email">
             <br>
-            Adresse (uniquement pour les assurés) : <INPUT TYPE = "text" NAME = "address">
+            <h3>Uniquement pour les assurés</h3>
+            Adresse : <INPUT TYPE = "text" NAME = "address">
             <br>
+            Courtier : <br/>
+            <select name="underwriter">
+                <c:forEach items="${underwriters}" var="item">
+                    <option value="${item.login}">
+                        ${item.lastname}
+                    </option>
+                </c:forEach>
+            </select> <br/><br/>
             <input TYPE="submit" VALUE="Créer le compte">
             <input TYPE="reset"  VALUE="Reset">
         </FORM>

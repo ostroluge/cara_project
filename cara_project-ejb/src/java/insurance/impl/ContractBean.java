@@ -96,7 +96,7 @@ public class ContractBean implements ContractBeanRemote {
         return contracts;
     }
 
-    @RolesAllowed("Insured")
+    @RolesAllowed({"Insured", "Underwriter"})
     @Override
     public List<Automobile> getAutomobileContractsByUser(String login) {
         String request = "select u from Utilisateur as u where u.login ='" + login + "'";
@@ -121,7 +121,7 @@ public class ContractBean implements ContractBeanRemote {
         return result;
     }
 
-    @RolesAllowed("Insured")
+    @RolesAllowed({"Insured", "Underwriter"})
     @Override
     public List<Habitation> getHabitationContractsByUser(String login) {
         String request = "select u from Utilisateur as u where u.login ='" + login + "'";
@@ -146,7 +146,7 @@ public class ContractBean implements ContractBeanRemote {
         return result;
     }
 
-    @RolesAllowed("Insured")
+    @RolesAllowed({"Insured", "Underwriter"})
     @Override
     public List<Life> getLifeContractsByUser(String login) {
         String request = "select u from Utilisateur as u where u.login ='" + login + "'";

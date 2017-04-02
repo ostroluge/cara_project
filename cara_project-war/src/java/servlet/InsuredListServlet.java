@@ -16,18 +16,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.user.Underwriter;
+import model.user.Insured;
 
 /**
  *
  * @author tostrowski
  */
-@WebServlet("/AddUserServlet")
-public class AddUserServlet extends HttpServlet {
+@WebServlet(name = "InsuredListServlet", urlPatterns = {"/InsuredListServlet"})
+public class InsuredListServlet extends HttpServlet {
 
     @EJB
     UserBeanRemote mUserBean;
-
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -40,11 +40,12 @@ public class AddUserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<Underwriter> underwriters = mUserBean.selectAllUnderwriters();
+        String remoteUser = request.getRemoteUser();
+        List<Insured> insured = mUserBean.selectInsuredByUnderwriter(remoteUser);
         
-        request.setAttribute("underwriters", underwriters);
+        request.setAttribute("insured", insured);
         
-        RequestDispatcher rd = request.getRequestDispatcher("SignUpForm.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("ListInsured.jsp");
         rd.forward(request, response);
     }
 
@@ -59,36 +60,7 @@ public class AddUserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String firstName =request.getParameter("firstName");
-        String lastName =request.getParameter("lastName");
-        String login =request.getParameter("login");
-        String password =request.getParameter("password");
-        String email =request.getParameter("email");
-        String address =request.getParameter("address");
-        String role =request.getParameter("role");
-        String loginUnderwriter = request.getParameter("underwriter");
         
-        mUserBean.addUser(firstName,
-                          lastName,
-                          login,
-                          email,
-                          password,
-                          address,
-                          role,
-                          loginUnderwriter);
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Ajout succès</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>L'utilisateur a été ajouté avec succès !</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
     }
 
     /**

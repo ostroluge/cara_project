@@ -29,7 +29,9 @@
                     <td><c:out value="${automobile.design}" /></td>
                     <td><c:out value="${automobile.registrationNumber}" /></td>
                     <td><c:out value="${automobile.nameMainDriver}" /></td>
-                    <td><a href="StopContractRequestServlet?idContract=${automobile.id}">Demande arrêt</a></td>
+                    <c:if test="${isUserInsured}">
+                        <td><a href="StopContractRequestServlet?idContract=${automobile.id}">Demande arrêt</a></td>
+                    </c:if>
                 </tr>
              </c:forEach>
         </table>
@@ -50,7 +52,9 @@
                     <td><c:out value="${habitation.subscriptionAmount}" /></td>
                     <td><c:out value="${habitation.maxAmount}" /></td>
                     <td><c:out value="${habitation.address}" /></td>
-                    <td><a href="StopContractRequestServlet?idContract=${habitation.id}">Demande arrêt</a></td>
+                    <c:if test="${isUserInsured}">
+                        <td><a href="StopContractRequestServlet?idContract=${habitation.id}">Demande arrêt</a></td>
+                    </c:if>
                 </tr>
              </c:forEach>
         </table>
@@ -71,7 +75,9 @@
                     <td><c:out value="${life.subscriptionAmount}" /></td>
                     <td><c:out value="${life.capitalAmount}" /></td>
                     <td><c:out value="${life.minimumSubscriptionDuration}" /></td>
-                    <td><a href="StopContractRequestServlet?idContract=${life.id}">Demande arrêt</a></td>
+                    <c:if test="${isUserInsured}">
+                        <td><a href="StopContractRequestServlet?idContract=${life.id}">Demande arrêt</a></td>
+                    </c:if>
                 </tr>
              </c:forEach>
         </table>

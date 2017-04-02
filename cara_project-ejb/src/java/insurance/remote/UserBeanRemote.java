@@ -8,6 +8,7 @@ package insurance.remote;
 import model.user.Insured;
 import java.util.List;
 import javax.ejb.Remote;
+import model.user.Underwriter;
 import model.user.Utilisateur;
 
 /**
@@ -23,11 +24,16 @@ public interface UserBeanRemote {
                         String mail,
                         String password,
                         String address,
-                        String role);
+                        String role,
+                        String loginUnderwriter);
     
     List<Insured> selectAllInsured();
     
+    List<Underwriter> selectAllUnderwriters();
+    
     List<Utilisateur> selectAll();
+    
+    List<Insured> selectInsuredByUnderwriter(String loginUnderwriter);
     
     void deleteUser(String loginUser);
 }

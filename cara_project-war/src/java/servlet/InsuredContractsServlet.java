@@ -44,11 +44,21 @@ public class InsuredContractsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String remoteUser = request.getRemoteUser();
+        String userLogin = null;
         
-        List<Automobile> automobiles = mContractBean.getAutomobileContractsByUser(remoteUser);
-        List<Habitation> habitations = mContractBean.getHabitationContractsByUser(remoteUser);
-        List<Life> lifes = mContractBean.getLifeContractsByUser(remoteUser);
+        String insuredLogin = request.getParameter("insuredLogin");
+        if (insuredLogin != null) {
+            userLogin = insuredLogin;
+        } else {
+            userLogin = request.getRemoteUser();
+        }
+        
+        boolean isUserInsured = request.isUserInRole("Insured");
+        request.setAttribute("isUserInsured", isUserInsured);
+        
+        List<Automobile> automobiles = mContractBean.getAutomobileContractsByUser(userLogin);
+        List<Habitation> habitations = mContractBean.getHabitationContractsByUser(userLogin);
+        List<Life> lifes = mContractBean.getLifeContractsByUser(userLogin);
         
         request.setAttribute("automobiles", automobiles);
         request.setAttribute("habitations", habitations);
